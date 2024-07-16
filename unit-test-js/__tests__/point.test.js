@@ -45,7 +45,9 @@ describe('คำนวณแต้มไม่สำเร็จ', () => {
 
     // Assert
     expect(() => calculatePoint(productPrice)).toThrow(RangeError);
-    expect(() => calculatePoint(productPrice)).toThrow('ราคาสินค้าต้องไม่ตำ่กว่า 0 บาท: ราคาสินค้าที่ได้รับเท่ากับ 0 บาท');
+    expect(() => calculatePoint(productPrice)).toThrow(
+      'ราคาสินค้าต้องไม่ตำ่กว่า 0 บาท: ราคาสินค้าที่ได้รับเท่ากับ 0 บาท'
+    );
   });
 
   it('ถ้าราคาสินค้าที่สั่งซื้อมีค่าเท่ากันกับ -1 ต้องโยน RangeError', () => {
@@ -54,7 +56,9 @@ describe('คำนวณแต้มไม่สำเร็จ', () => {
 
     // Assert
     expect(() => calculatePoint(productPrice)).toThrow(RangeError);
-    expect(() => calculatePoint(productPrice)).toThrow('ราคาสินค้าต้องไม่ตำ่กว่า 0 บาท: ราคาสินค้าที่ได้รับเท่ากับ -1 บาท');
+    expect(() => calculatePoint(productPrice)).toThrow(
+      'ราคาสินค้าต้องไม่ตำ่กว่า 0 บาท: ราคาสินค้าที่ได้รับเท่ากับ -1 บาท'
+    );
   });
 
   it('ถ้าราคาสินค้าที่สั่งซื้อมีค่าเท่ากันกับ -100 ต้องโยน RangeError', () => {
@@ -63,6 +67,23 @@ describe('คำนวณแต้มไม่สำเร็จ', () => {
 
     // Assert
     expect(() => calculatePoint(productPrice)).toThrow(RangeError);
-    expect(() => calculatePoint(productPrice)).toThrow('ราคาสินค้าต้องไม่ตำ่กว่า 0 บาท: ราคาสินค้าที่ได้รับเท่ากับ -100 บาท');
+    expect(() => calculatePoint(productPrice)).toThrow(
+      'ราคาสินค้าต้องไม่ตำ่กว่า 0 บาท: ราคาสินค้าที่ได้รับเท่ากับ -100 บาท'
+    );
   });
+});
+
+describe('table test', () => {
+
+  it.each([{ productPrice: 100.0, expectedPoint: 1 }])(
+    'ถ้าราคาสินค้าที่สั่งซื้อเท่ากันกับ 100.00 บาท จำนวนแต้มสะสมที่จะได้รับ ต้องเท่ากันกับ 1 แต้ม',
+    ({ productPrice, expectedPoint }) => {
+      // Act
+      const actualPoint = calculatePoint(productPrice);
+
+      // Assert
+      expect(actualPoint).toBe(expectedPoint);
+    }
+  );
+  
 });
