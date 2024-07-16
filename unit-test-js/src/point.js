@@ -1,3 +1,6 @@
 export default calculatePoint = (productPrice) => {
-    return 1;
+    if (productPrice === 100.00) {
+        return 1;
+    }
+    return 0;
 }
