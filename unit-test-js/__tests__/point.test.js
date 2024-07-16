@@ -47,4 +47,13 @@ describe('คำนวณแต้มไม่สำเร็จ', () => {
     expect(() => calculatePoint(productPrice)).toThrow(RangeError);
     expect(() => calculatePoint(productPrice)).toThrow('ราคาสินค้าต้องไม่ตำ่กว่า 0 บาท: ราคาสินค้าที่ได้รับเท่ากับ 0 บาท');
   });
+
+  it('ถ้าราคาสินค้าที่สั่งซื้อมีค่าเท่ากันกับ -1 ต้องโยน RangeError', () => {
+    // Arrange
+    const productPrice = -1;
+
+    // Assert
+    expect(() => calculatePoint(productPrice)).toThrow(RangeError);
+    expect(() => calculatePoint(productPrice)).toThrow('ราคาสินค้าต้องไม่ตำ่กว่า 0 บาท: ราคาสินค้าที่ได้รับเท่ากับ -1 บาท');
+  });
 });
