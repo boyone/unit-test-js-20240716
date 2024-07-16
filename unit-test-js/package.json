@@ -1,0 +1,28 @@
+{
+  "name": "unit-test",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "coverage": "npm run test -- --coverage",
+    "junit": "npm test -- --ci --reporters=default --reporters=jest-junit",
+    "test-all": "npm test -- --coverage --ci --reporters=default --reporters=jest-junit" 
+  },
+  "keywords": [],
+  "author": "boyone",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-junit": "^16.0.0"
+  },
+  "jest": {
+    "transform": {},
+    "coverageDirectory": "coverage"
+  },
+  "jest-junit": {
+      "outputDirectory": "junit-report",
+      "outputName": "junit.xml"
+  }
+}
