@@ -77,6 +77,7 @@ describe('table test', () => {
   it.each([
     { productPrice: 100.0, expectedPoint: 1 },
     { productPrice: 99.0, expectedPoint: 0 },
+    { productPrice: 5269.0, expectedPoint: 52 },
   ])(
     'ถ้าราคาสินค้าที่สั่งซื้อเท่ากันกับ $productPrice บาท จำนวนแต้มสะสมที่จะได้รับ ต้องเท่ากันกับ $expectedPoint แต้ม',
     ({ productPrice, expectedPoint }) => {
@@ -85,6 +86,23 @@ describe('table test', () => {
 
       // Assert
       expect(actualPoint).toBe(expectedPoint);
+    }
+  );
+});
+
+describe('table alternative test', () => {
+  it.each([
+    { productPrice: 0.0, error: RangeError },
+    { productPrice: -1.0, error: RangeError },
+    { productPrice: -100.0, error: RangeError },
+  ])(
+    'ถ้าราคาสินค้าที่สั่งซื้อมีค่าเท่ากันกับ $productPrice ต้องโยน RangeError',
+    ({ productPrice, error }) => {
+      // Assert
+      expect(() => calculatePoint(productPrice)).toThrow(error);
+      expect(() => calculatePoint(productPrice)).toThrow(
+        `ราคาสินค้าต้องไม่ตำ่กว่า 0 บาท: ราคาสินค้าที่ได้รับเท่ากับ ${productPrice} บาท`
+      );
     }
   );
 });
