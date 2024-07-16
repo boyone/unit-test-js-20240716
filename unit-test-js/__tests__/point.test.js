@@ -74,9 +74,11 @@ describe('คำนวณแต้มไม่สำเร็จ', () => {
 });
 
 describe('table test', () => {
-
-  it.each([{ productPrice: 100.0, expectedPoint: 1 }])(
-    'ถ้าราคาสินค้าที่สั่งซื้อเท่ากันกับ 100.00 บาท จำนวนแต้มสะสมที่จะได้รับ ต้องเท่ากันกับ 1 แต้ม',
+  it.each([
+    { productPrice: 100.0, expectedPoint: 1 },
+    { productPrice: 99.0, expectedPoint: 0 },
+  ])(
+    'ถ้าราคาสินค้าที่สั่งซื้อเท่ากันกับ $productPrice บาท จำนวนแต้มสะสมที่จะได้รับ ต้องเท่ากันกับ $expectedPoint แต้ม',
     ({ productPrice, expectedPoint }) => {
       // Act
       const actualPoint = calculatePoint(productPrice);
@@ -85,5 +87,4 @@ describe('table test', () => {
       expect(actualPoint).toBe(expectedPoint);
     }
   );
-  
 });
