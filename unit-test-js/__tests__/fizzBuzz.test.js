@@ -1,4 +1,4 @@
-import fizzBuzz from '../src/fizzBuzz';
+import fizzBuzz from '../src/fizzBuzz/fizzBuzz';
 
 describe('คำพูดถูกต้อง', () => {
   it.each([

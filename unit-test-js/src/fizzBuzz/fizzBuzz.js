@@ -1,4 +1,4 @@
-export default fizzBuzz = (inputNumber) => {
+const fizzBuzz = (inputNumber) => {
   if (inputNumber < 1) {
     throw new RangeError('ตัวเลขต้องไม่ต่ำกว่า 1');
   }
@@ -17,3 +17,5 @@ export default fizzBuzz = (inputNumber) => {
   }
   return inputNumber.toString();
 };
+
+export default fizzBuzz;
