@@ -19,11 +19,11 @@
 
 3. Support ECMAScript Modules[Option]
 
-    ```diff
-    {
-        "name": "js-test",
-    +   "type": "module",
-    ```
+   ```diff
+   {
+       "name": "js-test",
+   +   "type": "module",
+   ```
 
    ```diff
    "scripts": {
@@ -70,17 +70,62 @@
    "scripts": {
        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
        "coverage": "npm run test -- --coverage",
-   +   "junit": "npm test -- --ci --reporters=default --reporters=jest-junit"    
+   +   "junit": "npm test -- --ci --reporters=default --reporters=jest-junit"
    },
    ```
 
-    ```diff
-    "jest": {
-        "transform": {},
-        "coverageDirectory": "coverage"
-    },
-    +"jest-junit": {
-    +    "outputDirectory": "junit-report",
-    +    "outputName": "junit.xml"
-    +}
-    ```
+   ```diff
+   "jest": {
+       "transform": {},
+       "coverageDirectory": "coverage"
+   },
+   +"jest-junit": {
+   +    "outputDirectory": "junit-report",
+   +    "outputName": "junit.xml"
+   +}
+   ```
+
+---
+
+## Jest collectCoverageFrom
+
+1. Config
+
+```json
+"jest": {
+    "transform": {},
+    "verbose": true,
+    "coverageDirectory": "coverage",
++    "collectCoverageFrom": [
++      "src/**/*.js",
++      "!**/node_modules/**",
++      "!**/vendor/**"
++    ]
+  },
+```
+
+---
+
+## ESlint
+
+### Install eslint
+
+```sh
+npm install --save-dev eslint
+```
+
+### Add `lint` script to `package.json`
+
+```json
+"scripts": {
+    ...
+    "lint": "eslint src"
+    ...
+}
+```
+
+### Initial `eslint config` file
+
+```sh
+npm init @eslint/config@latest
+```
